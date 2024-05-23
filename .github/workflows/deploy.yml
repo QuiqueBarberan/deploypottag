@@ -19,7 +19,7 @@ jobs:
       - name: Get branch name
         id: get-branch
         run: |
-          BRANCH_NAME=$(git branch -r --contains tags/${{ github.ref }} | sed -e "s/.*\///")
+          BRANCH_NAME=$(git branch -r --contains ${{ github.ref }} | sed -e "s/.*\///")
           echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
 
   pre:
