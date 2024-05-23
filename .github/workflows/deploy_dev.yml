@@ -9,9 +9,9 @@ jobs:
   pre:
     if: startsWith(github.ref, 'refs/tags/v') && github.event.ref_type == 'tag'
     name: PRE
+    if: startsWith(github.ref, 'refs/tags/v') && github.event.ref_type == 'tag'
     runs-on: ubuntu-latest
-    environment:
-        name: PRE
+    environment: PRE
     steps:
       - name: Checkout code tag
         uses: actions/checkout@v4
