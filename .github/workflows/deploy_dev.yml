@@ -2,18 +2,16 @@ name: CI/CD PRE
 run-name: ${{ github.workflow }} by @${{ github.actor }}
 
 on:
-  push:
-    tags: v[1-9]+.[0-9]+.[0-9]+
+  create:
     branches: dev
 
 jobs:
   pre:
+    if: startsWith(github.ref, 'refs/tags/v') && github.event.ref_type == 'tag'
     name: PRE
     runs-on: ubuntu-latest
     environment:
         name: PRE
-        url: "https://${{ vars.URL }}"
-    timeout-minutes: 120
     steps:
       - name: Checkout code tag
         uses: actions/checkout@v4
