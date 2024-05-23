@@ -25,7 +25,7 @@ jobs:
   pre:
     name: PRE
     needs: [know_branch_job]
-    if: needs.know_branch_job.outputs.branchname == 'dev'
+    if: ${{ contains(needs.know_branch_job.outputs.branchname,'dev') }}
     runs-on: ubuntu-latest
     environment: PRE
     steps:
@@ -37,7 +37,7 @@ jobs:
   pro:
     name: PRO
     needs: [know_branch_job]
-    if: needs.know_branch_job.outputs.branchname == 'main'
+    if: ${{ contains(needs.know_branch_job.outputs.branchname,'main') }}
     runs-on: ubuntu-latest
     environment: PRO
     steps:
