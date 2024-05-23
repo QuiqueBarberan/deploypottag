@@ -20,7 +20,7 @@ jobs:
         id: get-branch
         run: |
           BRANCH_NAME=$(git branch -r --contains ${{ github.ref }})
-          echo BRANCH_NAME
+          echo $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
 
   pre:
