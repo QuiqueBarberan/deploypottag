@@ -15,4 +15,4 @@ jobs:
       - name: Checkout code tag
         uses: actions/checkout@v4
         with:
-          ref:  ${{ github.ref }}
+          ref:  ${{ github.ref.replace('refs/tags/', '') }}
