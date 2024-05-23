@@ -32,7 +32,7 @@ jobs:
       - name: Checkout code tag
         uses: actions/checkout@v4
         with:
-          ref:  ${{ github.ref.replace('refs/tags/', '') }}
+          ref:  ${{ github.ref }}
 
   pro:
     name: PRO
@@ -44,4 +44,4 @@ jobs:
       - name: Checkout code tag
         uses: actions/checkout@v4
         with:
-          ref:  ${{ github.ref.replace('refs/tags/', '') }}
+          ref:  ${{ github.ref }}
