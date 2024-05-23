@@ -7,7 +7,6 @@ on:
 
 jobs:
   pro:
-    if: startsWith(github.ref, 'refs/tags/v') && github.event.ref_type == 'tag'
     name: PRO
     if: startsWith(github.ref, 'refs/tags/v') && github.event.ref_type == 'tag'
     runs-on: ubuntu-latest
