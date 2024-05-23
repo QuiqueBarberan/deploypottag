@@ -1,0 +1,47 @@
+name: CI/CD
+run-name: ${{ github.workflow }} by @${{ github.actor }}
+
+on:
+  push:
+    tags: v[1-9]+.[0-9]+.[1-9]+
+
+jobs:
+  know_branch_job:
+    name: job
+    runs-on: ubuntu-latest
+    outputs:
+      branchname: ${{ steps.get-branch.outputs.BRANCH_NAME }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+            ref: ${{ github.ref }}
+      - name: Get branch name
+        id: get-branch
+        run: |
+          BRANCH_NAME=$(git branch -r --contains tags/${{ github.ref }} | sed -e "s/.*\///")
+          echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_OUTPUT"
+
+  pre:
+    name: PRE
+    needs: [know_branch_job]
+    if: needs.know_branch_job.outputs.branchname == 'dev'
+    runs-on: ubuntu-latest
+    environment: PRE
+    steps:
+      - name: Checkout code tag
+        uses: actions/checkout@v4
+        with:
+          ref:  ${{ github.ref.replace('refs/tags/', '') }}
+
+  pro:
+    name: PRO
+    needs: [know_branch_job]
+    if: needs.know_branch_job.outputs.branchname == 'main'
+    runs-on: ubuntu-latest
+    environment: PRO
+    steps:
+      - name: Checkout code tag
+        uses: actions/checkout@v4
+        with:
+          ref:  ${{ github.ref.replace('refs/tags/', '') }}
