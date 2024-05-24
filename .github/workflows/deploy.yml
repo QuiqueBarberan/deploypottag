@@ -8,11 +8,11 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    environment: {{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
+    environment: ${{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
     env:
-      ENTORNO: {{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
+      ENTORNO: ${{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
     steps:
-      - run: echo "ENTORNO: $ENTORNO"
+      - run: echo $ENTORNO
       - name: Checkout code tag
         uses: actions/checkout@v4
         with:
