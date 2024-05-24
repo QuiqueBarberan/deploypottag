@@ -12,7 +12,7 @@ jobs:
     env:
       ENTORNO: {{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
     steps:
-      - run: echo ENTORNO: $ENTORNO
+      - run: echo "ENTORNO: $ENTORNO"
       - name: Checkout code tag
         uses: actions/checkout@v4
         with:
