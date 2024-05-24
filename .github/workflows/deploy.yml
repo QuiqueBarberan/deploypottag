@@ -4,6 +4,7 @@ run-name: ${{ github.workflow }} by @${{ github.actor }}
 on:
   push:
     tags: v[1-9]+.[0-9]+.[1-9]+
+    branches: dev
 
 jobs:
 
