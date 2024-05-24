@@ -3,8 +3,7 @@ run-name: ${{ github.workflow }} by @${{ github.actor }}
 
 on:
   push:
-    tags: v[1-9]+.[0-9]+.[1-9]+
-    branches: dev
+    tags: v[1-9]+.[0-9]+.[0-9]+
 
 jobs:
 
@@ -12,26 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo github.ref:${{ github.ref }}
-          echo github.base_ref:${{ github.base_ref }}
+          echo {{ tojson(github.event) }} | jq
 
+  # job-on-dev:
+  #   if: startsWith(github.ref, 'refs/tags/') && github.base_ref == 'dev'
+  #   runs-on: ubuntu-latest
+  #   environment: PRE
+  #   steps:
+  #     - name: Checkout code tag
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref:  ${{ github.ref }}
 
-  job-on-dev:
-    if: startsWith(github.ref, 'refs/tags/') && github.base_ref == 'dev'
-    runs-on: ubuntu-latest
-    environment: PRE
-    steps:
-      - name: Checkout code tag
-        uses: actions/checkout@v4
-        with:
-          ref:  ${{ github.ref }}
-
-  job-on-main:
-    if: startsWith(github.ref, 'refs/tags/') && github.base_ref == 'main'
-    runs-on: ubuntu-latest
-    environment: PRO
-    steps:
-      - name: Checkout code tag
-        uses: actions/checkout@v4
-        with:
-          ref:  ${{ github.ref }}
+  # job-on-main:
+  #   if: startsWith(github.ref, 'refs/tags/') && github.base_ref == 'main'
+  #   runs-on: ubuntu-latest
+  #   environment: PRO
+  #   steps:
+  #     - name: Checkout code tag
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref:  ${{ github.ref }}
