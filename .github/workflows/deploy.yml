@@ -19,6 +19,6 @@ jobs:
           ref:  ${{ github.ref }}
       - name: Get the version
         id: get_version
-        run: echo "VERSION=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+        run: echo "VERSION=${GITHUB_REF#refs/head/}" >> $GITHUB_ENV
       - name: ensure
         run: echo ${{ env.VERSION }}
