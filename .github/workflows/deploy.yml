@@ -11,12 +11,15 @@ jobs:
     environment: ${{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
     env:
       ENTORNO: ${{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
+      TAG: ${GITHUB_REF#refs/tags/}
     steps:
       - run: echo $ENTORNO
       - name: Checkout code tag
         uses: actions/checkout@v4
         with:
-          ref:  ${{ github.ref }}
+          ref:  ${{ env.VERSION }}
+      - name: ver env-version
+        run: echo $TAG
       - name: Get the version
         id: get_version
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
