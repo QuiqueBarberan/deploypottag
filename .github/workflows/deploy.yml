@@ -11,7 +11,7 @@ jobs:
     environment: ${{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
     env:
       ENTORNO: ${{ github.event.base_ref == 'refs/heads/main' && 'PRO' || 'PRE' }}
-      TAG: ${GITHUB_REF#refs/tags/}
+      TAG: ${{GITHUB_REF#refs/tags/}}
     steps:
       - run: echo $ENTORNO
       - name: Checkout code tag
