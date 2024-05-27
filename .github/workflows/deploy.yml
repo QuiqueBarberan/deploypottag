@@ -17,3 +17,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref:  ${{ github.ref }}
+      - name: Get the version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      - name: ensure
+        run: echo ${{ env.VERSION }}
