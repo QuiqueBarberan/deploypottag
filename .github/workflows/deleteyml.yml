@@ -1,0 +1,15 @@
+name: CI/CD
+run-name: ${{ github.workflow }} by @${{ github.actor }}
+
+on:
+  push:
+
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: chat gpt knowledge
+        run: ./gradlew --version
